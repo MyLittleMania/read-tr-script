@@ -5,15 +5,19 @@
 <style type="text/css">
 body{
 	background-color: #0c1021;
+	color: #8da6ce;
 }
 .scroll-text-right{
+	z-index: 2;
+	position: absolute;
+	top: 0px;
+	left: 0px;
 	background-color: #0c1021;
 	font-family: 'Courier New';
 	font-size: 50px;
 	color: #8da6ce;
-	margin-top: 15%;
+	margin-top: 20%;
 	text-transform: uppercase;
-
 	/* vertical mirror text */
 	-moz-transform: scale(-1, 1);
 	-webkit-transform: scale(-1, 1);
@@ -22,11 +26,15 @@ body{
 	transform: scale(-1, 1);
 }
 .scroll-text-left{
+	z-index: 2;
+	position: absolute;
+	top: 0px;
+	left: 0px;
 	background-color: #0c1021;
 	font-family: 'Courier New';
 	font-size: 50px;
 	color: #8da6ce;
-	margin-top: 15%;
+	margin-top: 20%;
 	text-transform: uppercase;
 }
 textarea{
@@ -38,6 +46,15 @@ button{
 	color: #8da6ce;
 	margin-top: 5px;
 	margin-right: 5px;
+}
+#navigation{
+	margin-top: 25%;
+}
+.navigation-show{
+
+}
+.navigation-hide{
+	display: none;
 }
 </style>
 <script>
@@ -77,10 +94,18 @@ document.body.onkeyup = function(e){
 	}
 }
 function Show_navigation(){
-	alert('Shortcuts:\npress "-" to subtract 5 unit from scrollamount\npress "=" to add 5 unit to scrollamount\npress space to start/stop');
-}
+	var classes = document.getElementById("navigation").classList;
+ if (classes.contains("navigation-hide")){
+    classes.remove("navigation-hide");
+    classes.add("navigation-show");
+ 	}
+ else if (classes.contains("navigation-show")){
+ 	classes.remove("navigation-show");
+    classes.add("navigation-hide");
+ 	}
+}		
 function toggleClass(){
- var classes = document.getElementById("output").classList;
+ 	var classes = document.getElementById("output").classList;
  if (classes.contains("scroll-text-right")){
     classes.remove("scroll-text-right");
     classes.add("scroll-text-left");
@@ -96,7 +121,14 @@ function reset(){
 </script>
 <textarea id="textArea" rows="5" cols="50" placeholder="paste your text here and press enter" autofocus>
 </textarea><br />
-<button onClick="Show_navigation()">Show navigation</button><button onClick="toggleClass()">Change direction</button><button onClick="reset()">Reset</button>
+<button onClick="Show_navigation()">Show navigation</button><button onClick="toggleClass()">Change direction</button><button onClick="reset()">Reset</button><div id="navigation" class="navigation-hide">
+<h2>Shortcuts:
+<ul>
+<li>press "-" to subtract 5 unit from scrollamount</li>
+<li>press "=" to add 5 unit to scrollamount</li>
+<li>press space to start/stop</li>
+</ul>
+</h2></div>
 <marquee id="output" name="output" class="scroll-text-right" direction="left" scrollamount="20" behavior="scroll"></marquee>
 </body>
 </html>
