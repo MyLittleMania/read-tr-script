@@ -41,6 +41,12 @@ textarea{
 	background-color: #0c1021;
 	color: #8da6ce;
 }
+#counter{
+	position: absolute;
+	left: 87%;
+	top: 5%;
+	width: 120px;
+}
 button{
 	background-color: #0c1021;
 	color: #8da6ce;
@@ -76,12 +82,14 @@ document.body.onkeyup = function(e){
 		var attribute = d.getAttribute("scrollamount");
 		attribute = parseInt(attribute) - 5;
 		d.setAttribute("scrollamount", attribute);
+		document.getElementById("counter").innerHTML = "Scrollamount: " + parseInt(attribute);
 	}
 	if(e.keyCode == 187 || e.key === '='){
 		var d = document.getElementById("output");
 		var attribute = d.getAttribute("scrollamount");
 		attribute = parseInt(attribute) + 5;
 		d.setAttribute("scrollamount", attribute);
+		document.getElementById("counter").innerHTML = "Scrollamount: " + parseInt(attribute);
 	}
 	if(e.keyCode == 32){
 		var a = document.getElementById("output");
@@ -120,7 +128,7 @@ function reset(){
 }
 </script>
 <textarea id="textArea" rows="5" cols="50" placeholder="paste your text here and press enter" autofocus>
-</textarea><br />
+</textarea><div id="counter">Scrollamount: 20</div><br />
 <button onClick="Show_navigation()">Show navigation</button><button onClick="toggleClass()">Change direction</button><button onClick="reset()">Reset</button><div id="navigation" class="navigation-hide">
 <h2>Shortcuts:
 <ul>
