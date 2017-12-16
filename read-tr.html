@@ -1,0 +1,102 @@
+<html>
+<head>
+</head>
+<body>
+<style type="text/css">
+body{
+	background-color: #0c1021;
+}
+.scroll-text-right{
+	background-color: #0c1021;
+	font-family: 'Courier New';
+	font-size: 50px;
+	color: #8da6ce;
+	margin-top: 15%;
+	text-transform: uppercase;
+
+	/* vertical mirror text */
+	-moz-transform: scale(-1, 1);
+	-webkit-transform: scale(-1, 1);
+	-o-transform: scale(-1, 1);
+	-ms-transform: scale(-1, 1);
+	transform: scale(-1, 1);
+}
+.scroll-text-left{
+	background-color: #0c1021;
+	font-family: 'Courier New';
+	font-size: 50px;
+	color: #8da6ce;
+	margin-top: 15%;
+	text-transform: uppercase;
+}
+textarea{
+	background-color: #0c1021;
+	color: #8da6ce;
+}
+button{
+	background-color: #0c1021;
+	color: #8da6ce;
+	margin-top: 5px;
+	margin-right: 5px;
+}
+</style>
+<script>
+	global_var = 'a1';
+	a1 = 0;
+document.body.onkeyup = function(e){
+    if(e.keyCode == 13 || e.key === '/n'){
+		var content = document.getElementById("textArea").value;
+    	document.getElementById("output").innerHTML = content;
+    	var value = content;
+    	sessionStorage.setItem('key', value);
+    	if (sessionStorage.getItem('key')) {
+    		content.value = sessionStorage.getItem('key');
+    		output.value = sessionStorage.getItem('key');
+    	}
+	}
+	if(e.keyCode == 189){
+	 	var d = document.getElementById("output");
+		var attribute = d.getAttribute("scrollamount");
+		attribute = parseInt(attribute) - 5;
+		d.setAttribute("scrollamount", attribute);
+	}
+	if(e.keyCode == 187 || e.key === '='){
+		var d = document.getElementById("output");
+		var attribute = d.getAttribute("scrollamount");
+		attribute = parseInt(attribute) + 5;
+		d.setAttribute("scrollamount", attribute);
+	}
+	if(e.keyCode == 32){
+		var a = document.getElementById("output");
+		a.stop();
+		a1 = parseInt(a1) + 1;
+		if (a1 == 2){
+		a.start();
+		a1 = 0;
+		}
+	}
+}
+function Show_navigation(){
+	alert('Shortcuts:\npress "-" to subtract 5 unit from scrollamount\npress "=" to add 5 unit to scrollamount\npress space to start/stop');
+}
+function toggleClass(){
+ var classes = document.getElementById("output").classList;
+ if (classes.contains("scroll-text-right")){
+    classes.remove("scroll-text-right");
+    classes.add("scroll-text-left");
+ 	} 
+ else if (classes.contains("scroll-text-left")){
+ 	classes.remove("scroll-text-left");
+    classes.add("scroll-text-right");
+ 	}
+}
+function reset(){
+	location.reload(true);
+}
+</script>
+<textarea id="textArea" rows="5" cols="50" placeholder="paste your text here and press enter" autofocus>
+</textarea><br />
+<button onClick="Show_navigation()">Show navigation</button><button onClick="toggleClass()">Change direction</button><button onClick="reset()">Reset</button>
+<marquee id="output" name="output" class="scroll-text-right" direction="left" scrollamount="20" behavior="scroll"></marquee>
+</body>
+</html>
